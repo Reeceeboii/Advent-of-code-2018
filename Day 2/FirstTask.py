@@ -1,11 +1,8 @@
-IDs = []
 twoCount = 0
 threeCount = 0
 
 with open("input.txt", "r") as file_obj:
-    IDs = [line.strip() for line in file_obj]
-
-    for ID in IDs:
+    for ID in [line.strip() for line in file_obj]:
         two = False
         three = False
         ID = list(ID)
