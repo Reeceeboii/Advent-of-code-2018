@@ -1,26 +1,24 @@
 claims = []
 fabric = []
+gridSize = 1000
+count = 0
 
 def apply_claim(claimNo, x, y, width, height):
-    print("Claim {} @ {},{} -- {}x{}".format(claimNo, x, y, width, height))
-
-    for i in range (width):
-        for j in range (height):
-            print(claimNo, end = "")
-        print()
-
-    for i in range(x):
-        for j in range(y):
-            claims[x:width][y:height] = claimNo
-    
-
-with open("test.txt", "r") as file_obj:
+    for posX in range(x, x + width):
+        for posY in range(y, y + height):
+            if fabric[posY][posX] == ".":
+                fabric[posY][posX] = claimNo
+            else:
+                fabric[posY][posX] = "X"
+                
+            
+with open("input.txt", "r") as file_obj:
     for line in file_obj:
         line = "".join([x for x in line if x not in ["#",":","\n"]])
         claims.append(line.split(" "))
         
-for i in range(8):
-    fabric.append(["." for x in range(8)])
+for i in range(gridSize):
+    fabric.append(["." for x in range(gridSize)])
 
 for claim in claims:
     claimNo = claim[0]
@@ -30,7 +28,16 @@ for claim in claims:
     height = claim[3].split("x")[1]
     apply_claim(int(claimNo), int(x), int(y), int(width), int(height))
 
-    for x in fabric:
-        for y in x:
-            print(y, end = "")
-        print()
+for squareInch in fabric:
+    for claim in squareInch:
+        if claim == "X":
+            count += 1
+
+print("The number of square inches within 2 or more claims is: {}".format(count))
+
+
+
+
+
+
+
