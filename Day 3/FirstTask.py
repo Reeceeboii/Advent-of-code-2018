@@ -1,6 +1,6 @@
 claims = []
 fabric = []
-gridSize = 1000
+gridSize = 20
 count = 0
 
 def apply_claim(claimNo, x, y, width, height):
@@ -10,9 +10,9 @@ def apply_claim(claimNo, x, y, width, height):
                 fabric[posY][posX] = claimNo
             else:
                 fabric[posY][posX] = "X"
-                
             
-with open("input.txt", "r") as file_obj:
+            
+with open("test.txt", "r") as file_obj:
     for line in file_obj:
         line = "".join([x for x in line if x not in ["#",":","\n"]])
         claims.append(line.split(" "))
@@ -27,6 +27,7 @@ for claim in claims:
     width = claim[3].split("x")[0]
     height = claim[3].split("x")[1]
     apply_claim(int(claimNo), int(x), int(y), int(width), int(height))
+
 
 for squareInch in fabric:
     for claim in squareInch:
